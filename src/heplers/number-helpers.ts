@@ -1,0 +1,2 @@
+// generate a random number between X and Y
+export const getRandomNumber = (min: number, max: number): number => Math.floor(Math.random() * (max - min) + min);
