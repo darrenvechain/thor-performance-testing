@@ -1,10 +1,12 @@
 import { config } from "../../../constants";
-import { eventData } from "./data-loader";
 import { expectAtLeastOneEvent } from "./common";
+import { transferData } from "./data-loader";
 
 export let options = config.defaultOptions;
 
 const generateRequestBody = (): string => {
+  const txOrigin = transferData.randomTxOrigin().slice(2);
+
   return `{
     "options": {
       "offset": 0,
@@ -12,7 +14,7 @@ const generateRequestBody = (): string => {
     },
     "criteriaSet": [
       {
-        "topic2": "${eventData.randomTopic2()}"
+        "txOrigin": "${txOrigin}"
       }
     ]
   }`;

@@ -1,20 +1,19 @@
 import { config } from "../../../constants";
-import { eventData } from "./data-loader";
 import { expectAtLeastOneEvent } from "./common";
+import { numberHelpers } from "../../../helpers/number-helpers";
 
 export let options = config.defaultOptions;
 
 const generateRequestBody = (): string => {
   return `{
+    "range": {
+        "from": ${numberHelpers.randomBlock()}
+    },
     "options": {
       "offset": 0,
       "limit": 100
     },
-    "criteriaSet": [
-      {
-        "topic2": "${eventData.randomTopic2()}"
-      }
-    ]
+    "criteriaSet": []
   }`;
 };
 

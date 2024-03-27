@@ -6,21 +6,21 @@ if (!nodeUrl) {
   throw new Error("NODE_URL is not set");
 }
 
-// export const defaultOptions: Options = {
-//   stages: [
-//     { duration: "20s", target: 20 }, // simulate ramp-up of traffic from 1 to 20 users over 20 seconds.
-//     { duration: "20s", target: 20 }, // stay at 20 users for 20 seconds
-//     { duration: "20s", target: 40 }, // ramp-up to 40 users over 20 seconds
-//     { duration: "20s", target: 40 }, // stay at 40 users for 20 seconds
-//     { duration: "20s", target: 20 }, // ramp-down to 20 users over 20 seconds
-//     { duration: "20s", target: 0 }, // ramp-down to 0 users
-//   ],
-// };
-
 export const defaultOptions: Options = {
-  vus: 1,
-  duration: "1s",
+  stages: [
+    { duration: "10s", target: 5 }, // simulate ramp-up of traffic from 1 to 5 users.
+    { duration: "10s", target: 5 }, // stay at 5
+    { duration: "10s", target: 10 }, // ramp-up to 10 users
+    { duration: "10s", target: 10 }, // stay at 10 users for short amount of time
+    { duration: "10s", target: 5 }, // ramp-down to 5 users
+    { duration: "10s", target: 0 }, // ramp-down to 0 users
+  ],
 };
+
+// export const defaultOptions: Options = {
+//   vus: 1,
+//   duration: "10s",
+// };
 
 export const config = {
   nodeUrl: nodeUrl.endsWith("/") ? nodeUrl.slice(0, -1) : nodeUrl,
