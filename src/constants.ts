@@ -23,6 +23,6 @@ export const defaultOptions: Options = {
 };
 
 export const config = {
-  nodeUrl,
+  nodeUrl: nodeUrl.endsWith("/") ? nodeUrl.slice(0, -1) : nodeUrl,
   defaultOptions,
 };
