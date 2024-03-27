@@ -1,16 +1,17 @@
+import { addressData } from "../../../heplers/address-helpers";
+import { expectAtLeastOneEvent } from "./common";
 import { check } from 'k6';
-import { Options } from 'k6/options';
 import http from 'k6/http';
 import { config } from '../../../constants';
-import { addressData } from '../../../heplers/address-helpers';
 
-export let options: Options = {
-  vus: 1,
-  duration: '1s'
-};
+/**
+ * This test will query the logs endpoint for VTHO events with a specific recipient address.
+ * The recipient address is randomly chosen from a list from which we expect to have logs.
+ */
+
+export let options = config.defaultOptions;
 
 const generateRequestBody = (): string => {
-
   const vthoRecipient = addressData.randomVthoRecipient().slice(2);
 
   return `{
@@ -27,19 +28,6 @@ const generateRequestBody = (): string => {
       }
     ]
   }`;
-}
-
-export default () => {
-  const res = http.post(`${config.nodeUrl}/logs/event`, generateRequestBody());
-  check(res, {
-    'status is 200': () => res.status === 200,
-    'has transfer logs': () => {
-      if (typeof res.body === "string") {
-          const body = JSON.parse(res.body);
-          return body.length > 0;
-      } else {
-          return false;
-      }
-    },
-  });
 };
+
+export default expectAtLeastOneEvent(generateRequestBody)

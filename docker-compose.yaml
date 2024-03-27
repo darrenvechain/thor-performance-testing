@@ -1,7 +1,6 @@
 version: "3"
 
 services:
-
   influxdb:
     image: influxdb:1.8
     hostname: influxdb
@@ -10,7 +9,7 @@ services:
     environment:
       - INFLUXDB_DB=k6
     healthcheck:
-      test: [ "CMD", "curl", "influxdb:8086/api/v2/ping" ]
+      test: ["CMD", "curl", "influxdb:8086/api/v2/ping"]
       interval: 3s
       timeout: 10s
       retries: 30
@@ -27,22 +26,7 @@ services:
     volumes:
       - ./grafana-config:/var/lib/grafana
     healthcheck:
-      test: [ "CMD", "grafana-cli", "plugins", "ls" ]
+      test: ["CMD", "grafana-cli", "plugins", "ls"]
       interval: 3s
       timeout: 10s
       retries: 30
-
-  k6-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: run --out influxdb=http://influxdb:8086/k6 /app/dist/log-transfers-by-recipient.test.js
-    environment:
-      - NODE_URL=https://mainnet.dev.node.vechain.org
-    volumes:
-      - ./.output:/app/.output
-    depends_on:
-      influxdb:
-        condition: service_healthy
-      grafana:
-        condition: service_healthy

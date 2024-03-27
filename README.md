@@ -12,17 +12,21 @@
 ```bash
 yarn install
 yarn bundle
-source .env
-k6 run dist/log-events-by-vtho-recipient.test.js
+k6 run \
+    -e NODE_URL=https://mainnet.dev.node.vechain.org \
+    dist/log-events-by-topic0.test.js
 ```
 
 - For a full list of tests, please refer to the `./dist` directory after running `yarn bundle`)
 
-## Run with Docker, Grafana and InfluxDB
+## Run with Grafana & InfluxDB
 
 ```bash
 docker compose up -d --wait influxdb grafana
-docker compose up --build k6-app
+k6 run \
+    -e NODE_URL=https://mainnet.dev.node.vechain.org \
+    --out influxdb=http://localhost:8086/k6 \
+    dist/log-events-by-topic0.test.js
 ```
 
 - You can change the `command` on the `k6-app` service in the `docker-compose.yml` file to run a different test
