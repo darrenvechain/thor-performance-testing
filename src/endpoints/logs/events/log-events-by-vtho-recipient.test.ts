@@ -1,6 +1,6 @@
 import { addressData } from "../../../helpers/address-helpers";
 import { expectAtLeastOneEvent } from "./common";
-import { config } from '../../../constants';
+import { config } from "../../../constants";
 
 export let options = config.defaultOptions;
 
@@ -23,4 +23,4 @@ const generateRequestBody = (): string => {
   }`;
 };
 
-export default expectAtLeastOneEvent(generateRequestBody)
+export default expectAtLeastOneEvent(generateRequestBody);

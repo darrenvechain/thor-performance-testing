@@ -6,6 +6,12 @@ if (!nodeUrl) {
   throw new Error("NODE_URL is not set");
 }
 
+let network = __ENV.NETWORK as "mainnet" | "testnet" | undefined;
+
+if (!network || (network !== "mainnet" && network !== "testnet")) {
+  network = "mainnet";
+}
+
 export const defaultOptions: Options = {
   stages: [
     { duration: "10s", target: 5 }, // simulate ramp-up of traffic from 1 to 5 users.
@@ -25,4 +31,5 @@ export const defaultOptions: Options = {
 export const config = {
   nodeUrl: nodeUrl.endsWith("/") ? nodeUrl.slice(0, -1) : nodeUrl,
   defaultOptions,
+  network,
 };

@@ -1,18 +1,41 @@
-// using require here because these files are large and typescript can't infer the types
-const vetRecipients: string[] = require("../data/vet-recipients.json");
-const vetSenders: string[] = require("../data/vet-senders.json");
-const vthoRecipients: string[] = require("../data/vtho-recipients.json");
-const vthoSenders: string[] = require("../data/vtho-senders.json");
-const randomAddresses: string[] = require("../data/random-addresses.json");
+import { config } from "../constants";
+const randomAddresses = require("../data/random-addresses.json");
+
+const mainnet = {
+  vetRecipients: require("../data/mainnet/vet-recipients.json"),
+  vetSenders: require("../data/mainnet/vet-senders.json"),
+  vthoRecipients: require("../data/mainnet/vtho-recipients.json"),
+  vthoSenders: require("../data/mainnet/vtho-senders.json"),
+};
+
+// const testnet = {
+//   vetRecipients: require("../data/testnet/vet-recipients.json"),
+//   vetSenders: require("../data/testnet/vet-senders.json"),
+//   vthoRecipients: require("../data/testnet/vtho-recipients.json"),
+//   vthoSenders: require("../data/testnet/vtho-senders.json"),
+// };
+
+const nets = {
+  mainnet,
+  // testnet,
+};
+
+const activeNet = nets[config.network];
 
 const vetRecipient = () =>
-  vetRecipients[Math.floor(Math.random() * vetRecipients.length)];
+  activeNet.vetRecipients[
+    Math.floor(Math.random() * activeNet.vetRecipients.length)
+  ];
 const vetSender = () =>
-  vetSenders[Math.floor(Math.random() * vetSenders.length)];
+  activeNet.vetSenders[Math.floor(Math.random() * activeNet.vetSenders.length)];
 const vthoRecipient = () =>
-  vthoRecipients[Math.floor(Math.random() * vthoRecipients.length)];
+  activeNet.vthoRecipients[
+    Math.floor(Math.random() * activeNet.vthoRecipients.length)
+  ];
 const vthoSender = () =>
-  vthoSenders[Math.floor(Math.random() * vthoSenders.length)];
+  activeNet.vthoSenders[
+    Math.floor(Math.random() * activeNet.vthoSenders.length)
+  ];
 
 const randomAddress = () =>
   randomAddresses[Math.floor(Math.random() * randomAddresses.length)];
