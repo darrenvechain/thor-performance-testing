@@ -1,5 +1,5 @@
 import { config } from "../constants";
-const randomAddresses = require("../data/random-addresses.json");
+import randomAddresses from "../data/random-addresses.json";
 
 const mainnet = {
   vetRecipients: require("../data/mainnet/vet-recipients.json"),
@@ -8,16 +8,16 @@ const mainnet = {
   vthoSenders: require("../data/mainnet/vtho-senders.json"),
 };
 
-// const testnet = {
-//   vetRecipients: require("../data/testnet/vet-recipients.json"),
-//   vetSenders: require("../data/testnet/vet-senders.json"),
-//   vthoRecipients: require("../data/testnet/vtho-recipients.json"),
-//   vthoSenders: require("../data/testnet/vtho-senders.json"),
-// };
+const testnet = {
+  vetRecipients: require("../data/testnet/vet-recipients.json"),
+  vetSenders: require("../data/testnet/vet-senders.json"),
+  vthoRecipients: require("../data/testnet/vtho-recipients.json"),
+  vthoSenders: require("../data/testnet/vtho-senders.json"),
+};
 
 const nets = {
   mainnet,
-  // testnet,
+  testnet,
 };
 
 const activeNet = nets[config.network];

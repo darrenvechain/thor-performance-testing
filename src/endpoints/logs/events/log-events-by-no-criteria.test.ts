@@ -7,7 +7,7 @@ export let options = config.defaultOptions;
 const generateRequestBody = (): string => {
   return `{
     "range": {
-        "from": ${numberHelpers.randomBlock()},
+        "from": ${numberHelpers.randomBlock()}
     },
     "options": {
       "offset": 0,

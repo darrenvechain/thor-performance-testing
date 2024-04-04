@@ -22,7 +22,7 @@ const expectAtLeastOneEvent = (generateRequestBody: () => string) => {
   };
 };
 
-export const expectStatus200 = (generateRequestBody: () => string) => {
+const expectStatus200 = (generateRequestBody: () => string) => {
   return () => {
     const res = http.post(
       `${config.nodeUrl}/logs/event`,
@@ -34,4 +34,4 @@ export const expectStatus200 = (generateRequestBody: () => string) => {
   };
 };
 
-export { expectAtLeastOneEvent };
+export { expectAtLeastOneEvent, expectStatus200 };
