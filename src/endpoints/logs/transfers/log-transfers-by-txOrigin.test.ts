@@ -1,6 +1,7 @@
 import { config } from "../../../constants";
 import { expectAtLeastOneEvent } from "./common";
 import { transferData } from "./data-loader";
+import { randomHelpers } from "../../../helpers/random-helpers";
 
 export let options = config.defaultOptions;
 
@@ -16,7 +17,8 @@ const generateRequestBody = (): string => {
       {
         "txOrigin": "${txOrigin}"
       }
-    ]
+    ],
+    "order": "${randomHelpers.order()}"
   }`;
 };
 

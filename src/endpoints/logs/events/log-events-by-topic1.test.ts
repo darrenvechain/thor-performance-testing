@@ -1,6 +1,7 @@
 import { config } from "../../../constants";
 import { eventData } from "./data-loader";
 import { expectAtLeastOneEvent } from "./common";
+import { randomHelpers } from "../../../helpers/random-helpers";
 
 export let options = config.defaultOptions;
 
@@ -14,7 +15,8 @@ const generateRequestBody = (): string => {
       {
         "topic1": "${eventData.randomTopic1()}"
       }
-    ]
+    ],
+    "order": "${randomHelpers.order()}"
   }`;
 };
 

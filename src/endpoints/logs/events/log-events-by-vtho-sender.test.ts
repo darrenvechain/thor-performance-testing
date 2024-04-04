@@ -1,6 +1,7 @@
 import { addressData } from "../../../helpers/address-helpers";
 import { expectAtLeastOneEvent } from "./common";
 import { config } from "../../../constants";
+import { randomHelpers } from "../../../helpers/random-helpers";
 
 export let options = config.defaultOptions;
 
@@ -18,7 +19,8 @@ const generateRequestBody = (): string => {
         "topic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
         "topic1": "0x000000000000000000000000${vthoSender}"
       }
-    ]
+    ],
+    "order": "${randomHelpers.order()}"
   }`;
 };
 

@@ -1,19 +1,20 @@
 import { config } from "../../../constants";
 import { expectAtLeastOneEvent } from "./common";
-import { numberHelpers } from "../../../helpers/number-helpers";
+import { randomHelpers } from "../../../helpers/random-helpers";
 
 export let options = config.defaultOptions;
 
 const generateRequestBody = (): string => {
   return `{
     "range": {
-        "from": ${numberHelpers.randomBlock()}
+        "from": ${randomHelpers.block()}
     },
     "options": {
       "offset": 0,
       "limit": 100
     },
-    "criteriaSet": []
+    "criteriaSet": [],
+    "order": "${randomHelpers.order()}"
   }`;
 };
 
