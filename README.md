@@ -31,3 +31,14 @@ k6 run \
 
 - Open the
   Grafana [Dashboard](http://localhost:3000/d/GlqvWKLVk/k6-load-testing-results?orgId=1&refresh=5s&from=now-5m&to=now)
+
+## Testnet
+
+```bash
+docker compose up -d --wait
+k6 run \
+    -e NODE_URL=https://testnet.dev.node.vechain.org \
+    -e NETWORK=testnet \
+    --out influxdb=http://localhost:8086/k6 \
+    dist/log-events-by-topic0.test.js
+```
