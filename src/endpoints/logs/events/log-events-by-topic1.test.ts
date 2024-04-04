@@ -1,9 +1,7 @@
-import { config } from "../../../constants";
+import { config } from "../../../config";
 import { eventData } from "./data-loader";
 import { expectAtLeastOneEvent } from "./common";
 import { randomHelpers } from "../../../helpers/random-helpers";
-
-export let options = config.defaultOptions;
 
 const generateRequestBody = (): string => {
   return `{
@@ -19,5 +17,8 @@ const generateRequestBody = (): string => {
     "order": "${randomHelpers.order()}"
   }`;
 };
+
+export let options = config.defaultOptions;
+export let handleSummary = config.handleSummary;
 
 export default expectAtLeastOneEvent(generateRequestBody);

@@ -2,7 +2,7 @@
 // import senders from "./data/transfers-senders.json";
 // import recipients from "./data/transfers-recipients.json";
 
-import { config } from "../../../constants";
+import { config } from "../../../config";
 
 const mainnet = {
   txOrigins: require("./data/mainnet/transfer-txOrigins.json"),

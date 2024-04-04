@@ -1,4 +1,4 @@
-import { config } from "../constants";
+import { config } from "../config";
 import randomAddresses from "../data/random-addresses.json";
 
 const mainnet = {

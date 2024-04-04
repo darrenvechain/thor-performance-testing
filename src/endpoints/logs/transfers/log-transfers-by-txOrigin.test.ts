@@ -1,9 +1,7 @@
-import { config } from "../../../constants";
+import { config } from "../../../config";
 import { expectAtLeastOneEvent } from "./common";
 import { transferData } from "./data-loader";
 import { randomHelpers } from "../../../helpers/random-helpers";
-
-export let options = config.defaultOptions;
 
 const generateRequestBody = (): string => {
   const txOrigin = transferData.randomTxOrigin().slice(2);
@@ -22,4 +20,6 @@ const generateRequestBody = (): string => {
   }`;
 };
 
+export let options = config.defaultOptions;
+export let handleSummary = config.handleSummary;
 export default expectAtLeastOneEvent(generateRequestBody);

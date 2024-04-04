@@ -1,9 +1,7 @@
-import { config } from "../../../constants";
+import { config } from "../../../config";
 import { addressData } from "../../../helpers/address-helpers";
 import { expectAtLeastOneEvent } from "./common";
 import { randomHelpers } from "../../../helpers/random-helpers";
-
-export let options = config.defaultOptions;
 
 const generateRequestBody = (): string => {
   const sender = addressData.vetSender().slice(2);
@@ -21,5 +19,8 @@ const generateRequestBody = (): string => {
     "order": "${randomHelpers.order()}"
   }`;
 };
+
+export let options = config.defaultOptions;
+export let handleSummary = config.handleSummary;
 
 export default expectAtLeastOneEvent(generateRequestBody);

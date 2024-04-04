@@ -1,4 +1,4 @@
-import { config } from "../../../constants";
+import { config } from "../../../config";
 
 const mainnet = {
   topic0Values: require("./data/mainnet/events-topics0.json"),

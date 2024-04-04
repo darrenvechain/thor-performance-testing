@@ -1,8 +1,6 @@
-import { config } from "../../../constants";
+import { config } from "../../../config";
 import { randomHelpers } from "../../../helpers/random-helpers";
 import { expectStatus200 } from "./common";
-
-export let options = config.defaultOptions;
 
 const generateRequestBody = (): string => {
   const from = randomHelpers.block();
@@ -22,4 +20,6 @@ const generateRequestBody = (): string => {
   }`;
 };
 
+export let options = config.defaultOptions;
+export let handleSummary = config.handleSummary;
 export default expectStatus200(generateRequestBody);

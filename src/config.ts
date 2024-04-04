@@ -1,4 +1,7 @@
 import { Options } from "k6/options";
+import { K6Summary, K6SummaryWithEnv } from "./k6/types";
+// @ts-ignore
+import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 
 const nodeUrl = __ENV.NODE_URL;
 
@@ -11,6 +14,18 @@ let network = __ENV.NETWORK as "mainnet" | "testnet" | undefined;
 if (!network || (network !== "mainnet" && network !== "testnet")) {
   network = "mainnet";
 }
+
+const handleSummary = (summary: K6Summary) => {
+  const _summary: K6SummaryWithEnv = {
+    ...summary,
+    nodeUrl,
+  };
+
+  return {
+    [`.results/${Date.now()}.json`]: JSON.stringify(_summary), //the default data object
+    stdout: textSummary(summary, { enableColors: false })
+  };
+};
 
 export const defaultOptions: Options = {
   stages: [
@@ -32,4 +47,5 @@ export const config = {
   nodeUrl: nodeUrl.endsWith("/") ? nodeUrl.slice(0, -1) : nodeUrl,
   defaultOptions,
   network,
+  handleSummary,
 };

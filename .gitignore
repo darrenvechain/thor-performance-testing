@@ -3,3 +3,5 @@ yarn-error.log
 dist
 .DS_Store
 .idea
+*.csv
+k6.logs

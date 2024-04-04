@@ -9,6 +9,8 @@
 
 ## Run locally
 
+### Option 1: Run a single performance test
+
 ```bash
 yarn install
 yarn bundle
@@ -17,7 +19,32 @@ k6 run \
     dist/log-events-by-topic0.test.js
 ```
 
-- For a full list of tests, please refer to the `./dist` directory after running `yarn bundle`)
+### Option 2: Run against 2 nodes sequentially
+
+- Please refer to `.env` for the configuration options
+- Install:
+
+```bash
+yarn install
+```
+
+- Build:
+
+```bash
+yarn bundle
+```
+
+- List the test files
+
+```bash
+ls dist
+```
+
+- Run the test
+
+```html
+yarn test <test-file>
+```
 
 ## Run with Grafana & InfluxDB
 
