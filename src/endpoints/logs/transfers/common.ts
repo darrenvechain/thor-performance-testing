@@ -1,25 +1,25 @@
-import { check } from 'k6';
-import http from 'k6/http';
-import { config } from '../../../constants';
+import { check } from "k6";
+import http from "k6/http";
+import { config } from "../../../constants";
 
 const expectAtLeastOneEvent = (generateRequestBody: () => string) => {
-
   return () => {
-    const res = http.post(`${config.nodeUrl}/logs/transfer`, generateRequestBody());
+    const res = http.post(
+      `${config.nodeUrl}/logs/transfer`,
+      generateRequestBody(),
+    );
     check(res, {
-      'status is 200': () => res.status === 200,
-      'has transfer logs': () => {
+      "status is 200": () => res.status === 200,
+      "has transfer logs": () => {
         if (typeof res.body === "string") {
-            const body = JSON.parse(res.body);
-            return body.length > 0;
+          const body = JSON.parse(res.body);
+          return body.length > 0;
         } else {
-            return false;
+          return false;
         }
       },
     });
-  }
+  };
 };
-  
-export {
-    expectAtLeastOneEvent,
-}
+
+export { expectAtLeastOneEvent };
