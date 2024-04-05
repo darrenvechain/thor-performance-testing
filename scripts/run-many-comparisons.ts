@@ -1,5 +1,5 @@
 import util from "util";
-import { exec as execSync } from "child_process";
+import {exec as execSync} from "child_process";
 
 const exec = util.promisify(execSync);
 
@@ -20,6 +20,12 @@ const tests = [
 ];
 
 const start = async () => {
+
+  console.log(`Running the following tests:`);
+  console.log(`\n - ${tests.join('\n - ')} \n`);
+
+  await exec('rm -rf .results/*.json')
+
   for (const test of tests) {
     try {
       console.log(
