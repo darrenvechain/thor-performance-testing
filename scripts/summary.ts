@@ -74,10 +74,10 @@ const printResults = () => {
 
   splitByUrl(rows).map((summaries) => {
     console.log("\n" + summaries[0].URL + "\n");
-    console.log("Success Rate\tAverage\tMin\tMedian\tMax\tp(90)\tp(95)\tTotal Requests");
+    console.log("Success\tTotal Reqs\tAverage\tMin\tMed\tMax\tp(90)\tp(95)");
     summaries.forEach((summary) => {
       console.log(
-        `${summary["Success"]}\t${summary.Avg}\t${summary.Min}\t${summary.Med}\t${summary.Max}\t${summary["p(90)"]}\t${summary["p(95)"]}\t${summary["Num Reqs"]}`,
+        `${summary["Success"]}\t${summary["Num Reqs"]}\t${summary.Avg}\t${summary.Min}\t${summary.Med}\t${summary.Max}\t${summary["p(90)"]}\t${summary["p(95)"]}`,
       );
     });
   });
