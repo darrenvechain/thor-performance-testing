@@ -21,7 +21,9 @@ const getParams = () => {
   }
 
   if (!script) {
-    console.error("\n\n\tthe name of the k6 script is required as the first argument");
+    console.error(
+      "\n\n\tthe name of the k6 script is required as the first argument",
+    );
     process.exit(1);
   }
 

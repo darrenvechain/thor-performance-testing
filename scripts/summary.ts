@@ -1,17 +1,27 @@
 import fs from "fs";
 import path from "path";
-import {K6SummaryWithEnv} from "../src/k6/types";
+import { K6SummaryWithEnv } from "../src/k6/types";
 
 type TableRow = {
   URL: string;
-  ["Success Rate"]: string;
-  Average: number;
+  ["Success"]: string;
+  Avg: number;
   Min: number;
-  Median: number;
+  Med: number;
   Max: number;
   ["p(90)"]: number;
   ["p(95)"]: number;
-  ["Total Requests"]: number;
+  ["Num Reqs"]: number;
+};
+
+const splitByUrl = (summaries: TableRow[]): TableRow[][] => {
+  const urls = summaries.map((summary) => summary.URL);
+
+  const distinctUrls = Array.from(new Set(urls));
+
+  return distinctUrls.map((url) =>
+    summaries.filter((summary) => summary.URL === url),
+  );
 };
 
 const to2Decimal = (num: number) => Math.round(num * 100) / 100;
@@ -25,7 +35,7 @@ const printResults = () => {
 
   const summarys: K6SummaryWithEnv[] = jsonFiles
     .map((file) =>
-      JSON.parse(fs.readFileSync(path.join(resultsDir, file), "utf-8"))
+      JSON.parse(fs.readFileSync(path.join(resultsDir, file), "utf-8")),
     )
     .sort((a, b) => a.nodeUrl.localeCompare(b.nodeUrl));
 
@@ -38,20 +48,20 @@ const printResults = () => {
     summary.root_group.checks.forEach((check) => {
       totalChecks += check.passes + check.fails;
       successfulChecks += check.passes;
-    })
+    });
 
     const successRate = (successfulChecks / totalChecks) * 100;
 
     return {
       URL: summary.nodeUrl,
-      ["Success Rate"]: `${successRate}%`,
-      Average: to2Decimal(reqDurations.avg),
+      ["Success"]: `${successRate}%`,
+      Avg: to2Decimal(reqDurations.avg),
       Min: to2Decimal(reqDurations.min),
-      Median: to2Decimal(reqDurations.med),
+      Med: to2Decimal(reqDurations.med),
       Max: to2Decimal(reqDurations.max),
       ["p(90)"]: to2Decimal(reqDurations["p(90)"]),
       ["p(95)"]: to2Decimal(reqDurations["p(95)"]),
-      ["Total Requests"]: summary.metrics.http_reqs.values.count,
+      ["Num Reqs"]: summary.metrics.http_reqs.values.count,
     };
   });
 
@@ -62,9 +72,19 @@ const printResults = () => {
 
   fs.writeFileSync(path.join(__dirname, "..", "results.csv"), csv);
 
-  console.table(rows);
-
-  console.log("\n\n\tResults saved to 'results.csv'\n\n");
+  splitByUrl(rows).map((summaries) => {
+    console.log(`\n\t${summaries[0].URL}\n`);
+    console.table(summaries, [
+      "Success",
+      "Avg",
+      "Min",
+      "Med",
+      "Max",
+      "p(90)",
+      "p(95)",
+      "Num Reqs",
+    ]);
+  });
 };
 
 printResults();
