@@ -73,17 +73,13 @@ const printResults = () => {
   fs.writeFileSync(path.join(__dirname, "..", "results.csv"), csv);
 
   splitByUrl(rows).map((summaries) => {
-    console.log(`\n\t${summaries[0].URL}\n`);
-    console.table(summaries, [
-      "Success",
-      "Avg",
-      "Min",
-      "Med",
-      "Max",
-      "p(90)",
-      "p(95)",
-      "Num Reqs",
-    ]);
+    console.log("\n" + summaries[0].URL + "\n");
+    console.log("Success Rate\tAverage\tMin\tMedian\tMax\tp(90)\tp(95)\tTotal Requests");
+    summaries.forEach((summary) => {
+      console.log(
+        `${summary["Success"]}\t${summary.Avg}\t${summary.Min}\t${summary.Med}\t${summary.Max}\t${summary["p(90)"]}\t${summary["p(95)"]}\t${summary["Num Reqs"]}`,
+      );
+    });
   });
 };
 
