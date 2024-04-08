@@ -1,4 +1,5 @@
 import { config } from "../../../config";
+import { randomHelpers } from "../../../helpers/random-helpers";
 
 const mainnet = {
   topic0Values: require("./data/mainnet/events-topics0.json"),
@@ -23,26 +24,16 @@ const nets = {
 
 const activeNet = nets[config.network];
 
-const randomTopic0 = () =>
-  activeNet.topic0Values[
-    Math.floor(Math.random() * activeNet.topic0Values.length)
-  ];
-const randomTopic1 = () =>
-  activeNet.topic1Values[
-    Math.floor(Math.random() * activeNet.topic1Values.length)
-  ];
-const randomTopic2 = () =>
-  activeNet.topic2Values[
-    Math.floor(Math.random() * activeNet.topic2Values.length)
-  ];
-const randomTopic3 = () =>
-  activeNet.topic3Values[
-    Math.floor(Math.random() * activeNet.topic3Values.length)
-  ];
-const randomAddress = () =>
-  activeNet.contractAddresses[
-    Math.floor(Math.random() * activeNet.contractAddresses.length)
-  ];
+const randomTopic0 = (seed: number) =>
+  randomHelpers.element(activeNet.topic0Values, seed);
+const randomTopic1 = (seed: number) =>
+  randomHelpers.element(activeNet.topic1Values, seed);
+const randomTopic2 = (seed: number) =>
+  randomHelpers.element(activeNet.topic2Values, seed);
+const randomTopic3 = (seed: number) =>
+  randomHelpers.element(activeNet.topic3Values, seed);
+const randomAddress = (seed: number) =>
+  randomHelpers.element(activeNet.contractAddresses, seed);
 
 export const eventData = {
   randomTopic0,

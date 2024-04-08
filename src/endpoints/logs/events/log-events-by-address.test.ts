@@ -4,6 +4,8 @@ import { eventData } from "./data-loader";
 import { randomHelpers } from "../../../helpers/random-helpers";
 
 const generateRequestBody = (): string => {
+  const seed = randomHelpers.seed();
+
   return `{
     "options": {
       "offset": 0,
@@ -11,10 +13,10 @@ const generateRequestBody = (): string => {
     },
     "criteriaSet": [
       {
-        "address": "${eventData.randomAddress()}"
+        "address": "${eventData.randomAddress(seed)}"
       }
     ],
-    "order": "${randomHelpers.order()}"
+    "order": "${randomHelpers.order(seed)}"
   }`;
 };
 

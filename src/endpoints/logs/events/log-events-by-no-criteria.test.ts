@@ -3,16 +3,18 @@ import { expectAtLeastOneEvent } from "./common";
 import { randomHelpers } from "../../../helpers/random-helpers";
 
 const generateRequestBody = (): string => {
+  const seed = randomHelpers.seed();
+
   return `{
     "range": {
-        "from": ${randomHelpers.block()}
+        "from": ${randomHelpers.block(seed)}
     },
     "options": {
       "offset": 0,
       "limit": 100
     },
     "criteriaSet": [],
-    "order": "${randomHelpers.order()}"
+    "order": "${randomHelpers.order(seed)}"
   }`;
 };
 

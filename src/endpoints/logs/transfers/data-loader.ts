@@ -1,8 +1,5 @@
-// import txOrigins from "./data/transfers-txOrigins.json";
-// import senders from "./data/transfers-senders.json";
-// import recipients from "./data/transfers-recipients.json";
-
 import { config } from "../../../config";
+import { randomHelpers } from "../../../helpers/random-helpers";
 
 const mainnet = {
   txOrigins: require("./data/mainnet/transfer-txOrigins.json"),
@@ -23,12 +20,13 @@ const nets = {
 
 const activeNet = nets[config.network];
 
-const randomTxOrigin = () =>
-  activeNet.txOrigins[Math.floor(Math.random() * activeNet.txOrigins.length)];
-const randomSender = () =>
-  activeNet.senders[Math.floor(Math.random() * activeNet.senders.length)];
-const randomRecipient = () =>
-  activeNet.recipients[Math.floor(Math.random() * activeNet.recipients.length)];
+const randomTxOrigin = (seed: number) =>
+  randomHelpers.element(activeNet.txOrigins, seed);
+
+const randomSender = (seed: number) =>
+  randomHelpers.element(activeNet.senders, seed);
+const randomRecipient = (seed: number) =>
+  randomHelpers.element(activeNet.recipients, seed);
 
 export const transferData = {
   randomTxOrigin,

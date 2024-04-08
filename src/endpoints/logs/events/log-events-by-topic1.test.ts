@@ -4,6 +4,8 @@ import { expectAtLeastOneEvent } from "./common";
 import { randomHelpers } from "../../../helpers/random-helpers";
 
 const generateRequestBody = (): string => {
+  const seed = randomHelpers.seed();
+
   return `{
     "options": {
       "offset": 0,
@@ -11,10 +13,10 @@ const generateRequestBody = (): string => {
     },
     "criteriaSet": [
       {
-        "topic1": "${eventData.randomTopic1()}"
+        "topic1": "${eventData.randomTopic1(seed)}"
       }
     ],
-    "order": "${randomHelpers.order()}"
+    "order": "${randomHelpers.order(seed)}"
   }`;
 };
 
