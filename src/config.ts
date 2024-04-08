@@ -53,8 +53,8 @@ export const defaultOptions: Options = {
       rate: 100,
       timeUnit: "1s",
       duration: "1m",
-      preAllocatedVUs: 25,
-      maxVUs: 25,
+      preAllocatedVUs: 2,
+      maxVUs: 2,
     },
   },
 };
