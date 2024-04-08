@@ -50,7 +50,7 @@ export const defaultOptions: Options = {
     constant_request_rate: {
       executor: "constant-arrival-rate",
       // Number of iterations to execute each timeUnit period.
-      rate: 50,
+      rate: 100,
       timeUnit: "1s",
       duration: "1m",
       preAllocatedVUs: 25,

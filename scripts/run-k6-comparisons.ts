@@ -86,6 +86,12 @@ const runK6Comparisons = async () => {
   let k6Logs = "";
 
   for (let i = 0; i < params.amount; i++) {
+
+    if (i > 0) {
+      console.log("\n\n\tCooling down for 4 minutes...");
+      await new Promise((resolve) => setTimeout(resolve, 240_000));
+    }
+
     const command1 = `k6 run --env NODE_URL=${params.node1} --env NETWORK=${params.network} ${params.script}`;
     console.log(`\n\tRunning k6 (iteration=${i + 1}) on node 1...`);
     const { stdout: stdout1 } = await exec(command1);
