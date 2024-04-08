@@ -21,8 +21,7 @@ const start = async () => {
   console.log(`Running the following tests:`);
   console.log(`\n - ${tests.join("\n - ")} \n`);
 
-  await executeCommand("rm -rf .results/*.json");
-  await executeCommand("rm -rf results.json");
+  await executeCommand("rm -rf .results/*.json results.json");
 
   for (const test of tests) {
     try {

@@ -52,9 +52,9 @@ export const defaultOptions: Options = {
       // Number of iterations to execute each timeUnit period.
       rate: 100,
       timeUnit: "1s",
-      duration: "1m",
-      preAllocatedVUs: 2,
-      maxVUs: 2,
+      duration: "5m",
+      preAllocatedVUs: 50,
+      maxVUs: 50,
     },
   },
 };
