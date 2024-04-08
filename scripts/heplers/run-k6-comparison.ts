@@ -1,33 +1,30 @@
-import util from "util";
-import { exec as execSync } from "child_process";
 import * as paths from "path";
 import fs from "fs";
 import { config } from "dotenv";
+import { executeCommand } from "./execute-command";
+import { persistResults } from "./results";
 
-const exec = util.promisify(execSync);
 config();
 
-const getParams = () => {
+export const getParams = (testName: string) => {
   const node1 = process.env.NODE_1_URL;
   const node2 = process.env.NODE_2_URL;
   const iterations = process.env.ITERATIONS;
   let network = process.env.NETWORK;
-
-  const script = process.argv[2];
 
   if (!node1 || !node2) {
     console.error("\n\n\tBoth NODE_1_URL and NODE_2_URL are required");
     process.exit(1);
   }
 
-  if (!script) {
+  if (!testName) {
     console.error(
       "\n\n\tthe name of the k6 script is required as the first argument",
     );
     process.exit(1);
   }
 
-  const scriptPath = paths.join(__dirname, "..", "dist", script);
+  const scriptPath = paths.join(__dirname, "..", "..", "dist", testName);
 
   if (!fs.existsSync(scriptPath)) {
     console.error(`\n\n\tScript does not exist @ ${scriptPath}`);
@@ -73,8 +70,8 @@ const getParams = () => {
   };
 };
 
-const runK6Comparisons = async () => {
-  const params = getParams();
+export const runK6Comparison = async (testName: string) => {
+  const params = getParams(testName);
 
   console.log("\nRunning K6 comparisons with the following parameters:");
   console.log(`\n\tNode 1: ${params.node1}`);
@@ -83,10 +80,7 @@ const runK6Comparisons = async () => {
   console.log(`\tScript: ${params.script}`);
   console.log(`\tIterations: ${params.amount}`);
 
-  let k6Logs = "";
-
   for (let i = 0; i < params.amount; i++) {
-
     if (i > 0) {
       console.log("\n\n\tCooling down for 4 minutes...");
       await new Promise((resolve) => setTimeout(resolve, 240_000));
@@ -94,18 +88,12 @@ const runK6Comparisons = async () => {
 
     const command1 = `k6 run --env NODE_URL=${params.node1} --env NETWORK=${params.network} ${params.script}`;
     console.log(`\n\tRunning k6 (iteration=${i + 1}) on node 1...`);
-    const { stdout: stdout1 } = await exec(command1);
-    k6Logs += stdout1;
+    await executeCommand(command1);
 
     const command2 = `k6 run --env NODE_URL=${params.node2} --env NETWORK=${params.network} ${params.script}`;
     console.log(`\tRunning k6 (iteration=${i + 1}) on node 2...`);
-    const { stdout: stdout2 } = await exec(command2);
-    k6Logs += stdout2;
+    await executeCommand(command2);
   }
 
-  fs.writeFileSync("k6.logs", k6Logs);
-
-  console.log("\n\n\tDone! Logs are saved @ k6.logs\n\n");
+  await persistResults(params.script);
 };
-
-runK6Comparisons();

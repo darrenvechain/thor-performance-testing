@@ -27,9 +27,8 @@
   "scripts": {
     "bundle": "webpack",
     "format": "prettier --write src",
-    "test": "ts-node scripts/run-k6-comparisons.ts",
-    "test:many": "ts-node scripts/run-many-comparisons.ts",
-    "posttest": "ts-node scripts/summary.ts; rm -rf .results/*.json"
+    "test": "ts-node scripts/run-comparisons.ts",
+    "posttest": "ts-node scripts/summarise.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

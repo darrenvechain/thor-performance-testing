@@ -5,3 +5,4 @@ dist
 .idea
 *.csv
 k6.logs
+results.json

@@ -1,9 +1,7 @@
-import util from "util";
-import {exec as execSync} from "child_process";
+import { executeCommand } from "./heplers/execute-command";
+import { runK6Comparison } from "./heplers/run-k6-comparison";
 
-const exec = util.promisify(execSync);
-
-const tests = [
+export const tests = [
   "log-events-by-address.test.js",
   "log-events-by-no-criteria-with-range.test.js",
   "log-events-by-no-criteria.test.js",
@@ -20,11 +18,11 @@ const tests = [
 ];
 
 const start = async () => {
-
   console.log(`Running the following tests:`);
-  console.log(`\n - ${tests.join('\n - ')} \n`);
+  console.log(`\n - ${tests.join("\n - ")} \n`);
 
-  await exec('rm -rf .results/*.json')
+  await executeCommand("rm -rf .results/*.json");
+  await executeCommand("rm -rf results.json");
 
   for (const test of tests) {
     try {
@@ -33,9 +31,7 @@ const start = async () => {
       );
       console.log(`Running ${test}....`);
 
-      const { stdout } = await exec(`yarn test ${test}`);
-
-      console.log(stdout + "\n");
+      await runK6Comparison(test);
     } catch (error) {
       console.error(`Error running ${test}`, error);
     }
