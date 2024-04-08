@@ -21,29 +21,13 @@ k6 run \
 
 ### Option 2: Run against 2 nodes sequentially
 
-- Please refer to `.env` for the configuration options
-- Install:
+- Please refer to [`.env`](./.env) for the configuration options and [`./scripts/run-comparisons.ts`](./scripts/run-comparisons.ts) for the test scenarios.
+- Then run:
 
 ```bash
 yarn install
-```
-
-- Build:
-
-```bash
 yarn bundle
-```
-
-- List the test files
-
-```bash
-ls dist
-```
-
-- Run the test
-
-```html
-yarn test <test-file>
+yarn test
 ```
 
 ## Run with Grafana & InfluxDB
