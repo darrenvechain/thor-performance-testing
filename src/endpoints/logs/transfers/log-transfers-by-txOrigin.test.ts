@@ -4,7 +4,7 @@ import { transferData } from "./data-loader";
 import { randomHelpers } from "../../../helpers/random-helpers";
 
 const generateRequestBody = (): string => {
-  const txOrigin = transferData.randomTxOrigin().slice(2);
+  const seed = randomHelpers.seed();
 
   return `{
     "options": {
@@ -13,10 +13,10 @@ const generateRequestBody = (): string => {
     },
     "criteriaSet": [
       {
-        "txOrigin": "${txOrigin}"
+        "txOrigin": "${transferData.randomTxOrigin(seed)}"
       }
     ],
-    "order": "${randomHelpers.order()}"
+    "order": "${randomHelpers.order(seed)}"
   }`;
 };
 

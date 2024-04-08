@@ -4,7 +4,7 @@ import { expectAtLeastOneEvent } from "./common";
 import { randomHelpers } from "../../../helpers/random-helpers";
 
 const generateRequestBody = (): string => {
-  const recipient = addressData.vetRecipient().slice(2);
+  const seed = randomHelpers.seed();
 
   return `{
     "options": {
@@ -13,10 +13,10 @@ const generateRequestBody = (): string => {
     },
     "criteriaSet": [
       {
-        "recipient": "${recipient}"
+        "recipient": "${addressData.vetRecipient(seed)}"
       }
     ],
-    "order": "${randomHelpers.order()}"
+    "order": "${randomHelpers.order(seed)}"
   }`;
 };
 

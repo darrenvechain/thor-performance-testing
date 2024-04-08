@@ -3,12 +3,13 @@ import { randomHelpers } from "../../../helpers/random-helpers";
 import { expectStatus200 } from "./common";
 
 const generateRequestBody = (): string => {
-  const from = randomHelpers.block();
+  const seed = randomHelpers.seed();
+  const from = randomHelpers.block(seed);
   const to = from + 100;
 
   return `{
     "range": {
-        "from": ${randomHelpers.block()},
+        "from": ${from},
         "to": ${to}
     },
     "options": {
@@ -16,7 +17,7 @@ const generateRequestBody = (): string => {
       "limit": 100
     },
     "criteriaSet": [],
-    "order": "${randomHelpers.order()}"
+    "order": "${randomHelpers.order(seed)}"
   }`;
 };
 
