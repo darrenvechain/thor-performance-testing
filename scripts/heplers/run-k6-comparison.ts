@@ -82,6 +82,9 @@ export const runK6Comparison = async (testName: string) => {
   console.log(`\tTime: ${new Date().toLocaleTimeString()}`)
 
   for (let i = 0; i < params.amount; i++) {
+
+    const startTime = Date.now();
+
     const command1 = `k6 run --env NODE_URL=${params.node1} --env NETWORK=${params.network} ${params.script}`;
     console.log(`\n\tRunning k6 (iteration=${i + 1}) on node 1...`);
     console.log(`\tTime: ${new Date().toLocaleTimeString()}`)
@@ -91,6 +94,14 @@ export const runK6Comparison = async (testName: string) => {
     console.log(`\tRunning k6 (iteration=${i + 1}) on node 2...`);
     console.log(`\tTime: ${new Date().toLocaleTimeString()}`)
     await executeCommand(command2);
+
+    const endTime = Date.now();
+
+    //ensure that the time between iterations is at least 5 minutes
+    const diff = endTime - startTime;
+    const waitTime = 300_000 - diff;
+    console.log(`\n\tWaiting for ${waitTime / 1000} seconds before next iteration...`);
+    await new Promise((resolve) => setTimeout(resolve, waitTime));
   }
 
   await persistResults(params.script);
