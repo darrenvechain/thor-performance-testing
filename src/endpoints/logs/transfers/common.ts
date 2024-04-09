@@ -1,12 +1,17 @@
-import { check } from "k6";
+import { check, sleep } from "k6";
 import http from "k6/http";
 import { config } from "../../../config";
+import { randomHelpers } from "../../../helpers/random-helpers";
 
-const expectAtLeastOneEvent = (generateRequestBody: () => string) => {
+const expectAtLeastOneEvent = (
+  generateRequestBody: (seed: number) => string,
+) => {
   return () => {
+    const seed = randomHelpers.seed();
+
     const res = http.post(
       `${config.nodeUrl}/logs/transfer`,
-      generateRequestBody(),
+      generateRequestBody(seed),
     );
     check(res, {
       "status is 200": () => res.status === 200,
@@ -19,6 +24,9 @@ const expectAtLeastOneEvent = (generateRequestBody: () => string) => {
         }
       },
     });
+
+    //sleep in seconds
+    sleep(0.5);
   };
 };
 

@@ -1,5 +1,5 @@
-import { readResults, TestResult } from "./heplers/results";
-import { getParams } from "./heplers/run-k6-comparison";
+import {readResults, TestResult} from "./heplers/results";
+import {getParams} from "./heplers/run-k6-comparison";
 
 const results = readResults();
 
@@ -22,10 +22,10 @@ tests.forEach((test) => {
   const printSummary = (results: TestResult[], url: string) => {
     console.log(`\n\t${test} (${url})\n`);
 
-    console.log("Success\tTotal Reqs\tAverage\tMin\tMed\tMax\tp(90)\tp(95)");
+    console.log("Success\tTotal Reqs\tDuration\tAverage\tMin\tMed\tMax\tp(90)\tp(95)");
     results.forEach((result) => {
       console.log(
-        `${result.successRate}\t${result.totalReqs}\t${result.avg}\t${result.min}\t${result.median}\t${result.max}\t${result.p90}\t${result.p95}`,
+        `${result.successRate}\t${result.totalReqs}\t${result.duration}\t${result.avg}\t${result.min}\t${result.median}\t${result.max}\t${result.p90}\t${result.p95}`
       );
     });
   };

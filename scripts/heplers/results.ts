@@ -13,6 +13,8 @@ export type TestResult = {
   p90: number;
   p95: number;
   totalReqs: number;
+  time: string;
+  duration: number
 };
 
 const resultsPath = path.join(__dirname, "..", "..", "results.json");
@@ -76,6 +78,8 @@ const persistResults = async (testName: string) => {
       p95: to2Decimal(reqDurations["p(95)"]),
       totalReqs: summary.metrics.http_reqs.values.count,
       name: name,
+      time: new Date().toLocaleString(),
+      duration: summary.state.testRunDurationMs,
     };
   });
 

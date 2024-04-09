@@ -79,14 +79,17 @@ export const runK6Comparison = async (testName: string) => {
   console.log(`\tNetwork: ${params.network}`);
   console.log(`\tScript: ${params.script}`);
   console.log(`\tIterations: ${params.amount}`);
+  console.log(`\tTime: ${new Date().toLocaleTimeString()}`)
 
   for (let i = 0; i < params.amount; i++) {
     const command1 = `k6 run --env NODE_URL=${params.node1} --env NETWORK=${params.network} ${params.script}`;
     console.log(`\n\tRunning k6 (iteration=${i + 1}) on node 1...`);
+    console.log(`\tTime: ${new Date().toLocaleTimeString()}`)
     await executeCommand(command1);
 
     const command2 = `k6 run --env NODE_URL=${params.node2} --env NETWORK=${params.network} ${params.script}`;
     console.log(`\tRunning k6 (iteration=${i + 1}) on node 2...`);
+    console.log(`\tTime: ${new Date().toLocaleTimeString()}`)
     await executeCommand(command2);
   }
 

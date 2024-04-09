@@ -48,13 +48,11 @@ const handleSummary = (summary: K6Summary) => {
 export const defaultOptions: Options = {
   scenarios: {
     constant_request_rate: {
-      executor: "constant-arrival-rate",
-      // Number of iterations to execute each timeUnit period.
-      rate: 100,
-      timeUnit: "1s",
-      duration: "5m",
-      preAllocatedVUs: 50,
-      maxVUs: 50,
+      executor: "per-vu-iterations",
+      // 50 * 500 = 25,000
+      vus: 50,
+      iterations: 500,
+      maxDuration: "1h",
     },
   },
 };

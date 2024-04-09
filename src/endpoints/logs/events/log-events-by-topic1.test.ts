@@ -3,9 +3,7 @@ import { eventData } from "./data-loader";
 import { expectAtLeastOneEvent } from "./common";
 import { randomHelpers } from "../../../helpers/random-helpers";
 
-const generateRequestBody = (): string => {
-  const seed = randomHelpers.seed();
-
+const generateRequestBody = (seed: number): string => {
   return `{
     "options": {
       "offset": 0,

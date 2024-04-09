@@ -2,8 +2,7 @@ import { config } from "../../../config";
 import { randomHelpers } from "../../../helpers/random-helpers";
 import { expectStatus200 } from "./common";
 
-const generateRequestBody = (): string => {
-  const seed = randomHelpers.seed();
+const generateRequestBody = (seed: number): string => {
   const from = randomHelpers.block(seed);
   const to = from + 100;
 

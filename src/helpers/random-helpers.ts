@@ -3,12 +3,12 @@ import { randomSeed } from "k6";
 import exec from "k6/execution";
 import crypto from "k6/crypto";
 
-const seed = () => {
+const seed = (index = 0) => {
   const { idInTest, idInInstance, iterationInInstance, iterationInScenario } =
     exec.vu;
 
   const hash = crypto.sha256(
-    `${idInTest}-${idInInstance}-${iterationInInstance}-${iterationInScenario}`,
+    `${idInTest}-${idInInstance}-${iterationInInstance}-${iterationInScenario}-${index}`,
     "hex",
   );
   return parseInt(hash.slice(-12), 16);

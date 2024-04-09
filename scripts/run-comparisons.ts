@@ -2,9 +2,9 @@ import { executeCommand } from "./heplers/execute-command";
 import { runK6Comparison } from "./heplers/run-k6-comparison";
 
 export const tests = [
-  "log-events-by-address.test.js",
-  "log-events-by-no-criteria-with-range.test.js",
+  // "log-events-by-address.test.js",
   "log-events-by-no-criteria.test.js",
+  "log-events-by-no-criteria-with-range.test.js",
   "log-events-by-topic0.test.js",
   "log-events-by-topic1.test.js",
   "log-events-by-topic2.test.js",
