@@ -36,8 +36,8 @@ tests.forEach((test) => {
     console.log(`\n${url}`);
     console.log("Success\tTotal Reqs\tDuration\tAverage\tMin\tMed\tMax\tp(90)\tp(95)");
 
-    // ms to mins and seconds
-    results.forEach((result) => {
+    // Sort by run time -> then log the table
+    results.sort((a, b) => a.time - b.time).forEach((result) => {
       console.log(
         `${result.successRate}\t${result.totalReqs}\t${msToMinsAndSeconds(result.duration)}\t${result.avg}\t${result.min}\t${result.median}\t${result.max}\t${result.p90}\t${result.p95}`
       );

@@ -1,5 +1,6 @@
 export interface K6SummaryWithEnv extends K6Summary {
   nodeUrl: string;
+  time: number;
 }
 
 export interface K6Summary {

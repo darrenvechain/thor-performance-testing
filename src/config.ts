@@ -19,6 +19,7 @@ const handleSummary = (summary: K6Summary) => {
   const _summary: K6SummaryWithEnv = {
     ...summary,
     nodeUrl,
+    time: Date.now(),
   };
 
   return {

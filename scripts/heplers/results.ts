@@ -13,7 +13,7 @@ export type TestResult = {
   p90: number;
   p95: number;
   totalReqs: number;
-  time: string;
+  time: number;
   duration: number
 };
 
@@ -78,7 +78,7 @@ const persistResults = async (testName: string) => {
       p95: to2Decimal(reqDurations["p(95)"]),
       totalReqs: summary.metrics.http_reqs.values.count,
       name: name,
-      time: new Date().toLocaleString(),
+      time: summary.time,
       duration: summary.state.testRunDurationMs,
     };
   });
