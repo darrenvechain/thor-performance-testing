@@ -27,7 +27,7 @@
   "scripts": {
     "bundle": "webpack",
     "format": "prettier --write src",
-    "test": "ts-node scripts/run-comparisons.ts",
+    "test:comparison": "ts-node scripts/run-comparisons.ts",
     "posttest": "ts-node scripts/summarise.ts"
   },
   "dependencies": {

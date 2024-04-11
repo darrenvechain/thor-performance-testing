@@ -1,14 +1,14 @@
 // generate a between number between X and Y
-import { randomSeed } from "k6";
+import {randomSeed} from "k6";
 import exec from "k6/execution";
 import crypto from "k6/crypto";
 
 const seed = (index = 0) => {
-  const { idInTest, idInInstance, iterationInInstance, iterationInScenario } =
+  const {idInTest, iterationInInstance} =
     exec.vu;
 
   const hash = crypto.sha256(
-    `${idInTest}-${idInInstance}-${iterationInInstance}-${iterationInScenario}-${index}`,
+    `${idInTest}-${iterationInInstance}-${index}`,
     "hex",
   );
   return parseInt(hash.slice(-12), 16);
