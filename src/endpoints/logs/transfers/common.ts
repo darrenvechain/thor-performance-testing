@@ -14,8 +14,8 @@ const expectAtLeastOneEvent = (
       generateRequestBody(seed),
     );
     check(res, {
-      "status is 200": () => res.status === 200,
-      "has transfer logs": () => {
+      "logs-transfers || status is 200": () => res.status === 200,
+      "logs-transfers || has transfer logs": () => {
         if (typeof res.body === "string") {
           const body = JSON.parse(res.body);
           return body.length > 0;

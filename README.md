@@ -16,7 +16,7 @@ yarn install
 yarn bundle
 k6 run \
     -e NODE_URL=https://mainnet.dev.node.vechain.org \
-    dist/log-events-by-topic0.test.js
+    dist/all-endpoints.test.js
 ```
 
 ### Option 2: Run against 2 nodes sequentially
@@ -37,7 +37,7 @@ docker compose up -d --wait
 k6 run \
     -e NODE_URL=https://mainnet.dev.node.vechain.org \
     --out influxdb=http://localhost:8086/k6 \
-    dist/log-events-by-topic0.test.js
+    dist/all-endpoints.test.js
 ```
 
 - Open the
@@ -51,5 +51,5 @@ k6 run \
     -e NODE_URL=https://testnet.dev.node.vechain.org \
     -e NETWORK=testnet \
     --out influxdb=http://localhost:8086/k6 \
-    dist/log-events-by-topic0.test.js
+    dist/all-endpoints.test.js
 ```

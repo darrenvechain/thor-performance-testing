@@ -1,6 +1,5 @@
 import { addressData } from "../../../helpers/address-helpers";
 import { expectAtLeastOneEvent } from "./common";
-import { config } from "../../../config";
 import { randomHelpers } from "../../../helpers/random-helpers";
 
 const generateRequestBody = (seed: number): string => {
@@ -21,7 +20,6 @@ const generateRequestBody = (seed: number): string => {
   }`;
 };
 
-export let options = config.defaultOptions;
-export let handleSummary = config.handleSummary;
+export * from "../../../config";
 
 export default expectAtLeastOneEvent(generateRequestBody);

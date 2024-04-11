@@ -23,15 +23,15 @@ const nets = {
 
 const activeNet = nets[config.network];
 
-const vetRecipient = (seed: number) =>
+const vetRecipient = (seed: number): string =>
   randomHelpers.element(activeNet.vetRecipients, seed);
-const vetSender = (seed: number) =>
+const vetSender = (seed: number): string =>
   randomHelpers.element(activeNet.vetSenders, seed);
-const vthoRecipient = (seed: number) =>
+const vthoRecipient = (seed: number): string =>
   randomHelpers.element(activeNet.vthoRecipients, seed);
-const vthoSender = (seed: number) =>
+const vthoSender = (seed: number): string =>
   randomHelpers.element(activeNet.vthoSenders, seed);
-const randomAddress = (seed: number) =>
+const randomAddress = (seed: number): string =>
   randomHelpers.element(randomAddresses, seed);
 
 export const addressData = {

@@ -1,4 +1,3 @@
-import { config } from "../../../config";
 import { eventData } from "./data-loader";
 import { expectAtLeastOneEvent } from "./common";
 import { randomHelpers } from "../../../helpers/random-helpers";
@@ -18,7 +17,6 @@ const generateRequestBody = (seed: number): string => {
   }`;
 };
 
-export let options = config.defaultOptions;
-export let handleSummary = config.handleSummary;
+export * from "../../../config";
 
 export default expectAtLeastOneEvent(generateRequestBody);

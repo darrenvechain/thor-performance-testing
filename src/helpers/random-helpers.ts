@@ -22,7 +22,7 @@ const random = (seed: number): number => {
   return Math.random();
 };
 
-const element = (arr: string[], seed: number) =>
+const element = <T>(arr: T[], seed: number): T =>
   arr[Math.floor(random(seed) * arr.length)];
 
 const between = (min: number, max: number, seed: number): number =>
@@ -34,6 +34,8 @@ const block = (seed: number): number => between(0, 18_000_000, seed);
 const order = (seed: number): "asc" | "desc" =>
   random(seed) > 0.5 ? "asc" : "desc";
 
+const bool = (seed: number): boolean => random(seed) > 0.5;
+
 export const randomHelpers = {
   between,
   block,
@@ -41,4 +43,5 @@ export const randomHelpers = {
   random,
   element,
   seed,
+  bool,
 };
