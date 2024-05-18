@@ -1,7 +1,7 @@
 import { randomHelpers } from "../../helpers/random-helpers.js";
 import { config } from "../../config.js";
 import { check } from "k6";
-import {http} from "../../helpers/http.js";
+import { http } from "../../helpers/http.js";
 
 const expectNonNull = (requestPath) => {
   return () => {
