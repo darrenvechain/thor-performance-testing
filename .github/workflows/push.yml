@@ -7,8 +7,8 @@ on:
       - main
 
 jobs:
-  k6_transpile_bundle_test:
-    name: Transpile, bundle and run
+  k6:
+    name: Run k6 Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
