@@ -1,15 +1,18 @@
-import { randomHelpers } from "../../helpers/random-helpers.js";
-import { config } from "../../config.js";
-import { http } from "../../helpers/http.js";
-import { check } from "k6";
+import {randomHelpers} from "../../helpers/random-helpers.js";
+import {config} from "../../config.js";
+import {http} from "../../helpers/http.js";
+import {check} from "k6";
 
-const expectNonNull = (requestPath) => {
+const expectNonNull = (requestPath, domain) => {
   return () => {
+    if (!domain) {
+        domain = "blocks";
+    }
     const seed = randomHelpers.seed();
     const res = http.get(`${config.nodeUrl}/blocks/${requestPath(seed)}`);
     check(res, {
-      "blocks || status is 200": () => res.status === 200,
-      "blocks || has a non-null response": () => {
+      [`${domain} || status is 200`]: () => res.status === 200,
+      [`${domain} || not null`]: () => {
         if (typeof res.body === "string") {
           if (res.body === "null") {
             return false;
@@ -26,12 +29,15 @@ const expectNonNull = (requestPath) => {
   };
 };
 
-const expectStatus200 = (requestPath) => {
+const expectStatus200 = (requestPath, domain) => {
   return () => {
+    if (!domain) {
+      domain = "blocks";
+    }
     const seed = randomHelpers.seed();
     const res = http.get(`${config.nodeUrl}/blocks/${requestPath(seed)}`);
     check(res, {
-      "blocks || status is 200": () => res.status === 200,
+        [`${domain} || status is 200`]: () => res.status === 200,
     });
   };
 };
