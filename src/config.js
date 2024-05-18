@@ -28,7 +28,7 @@ export const handleSummary = (summary) => {
 /** @type {Options} */
 export const options = {
     scenarios: {
-        contacts: {
+        constant_arrival_rate: {
             executor: 'constant-arrival-rate',
             duration: '1m',
             rate: 100,
