@@ -20,4 +20,4 @@ jobs:
         uses: grafana/k6-action@v0.2.0
         with:
           filename: src/endpoints/all-endpoints.test.js
-          flags: --env NODE_URL=https://mainnet.vechain.org
+          flags: --env NODE_URL=https://mainnet.vechain.org --console-output=load.log --log-format=raw
