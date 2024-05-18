@@ -7,18 +7,17 @@ on:
       - main
 
 jobs:
-  k6_transpile_bundle_test:
-    name: Transpile, bundle and run
+  k6:
+    name: Run k6 Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - run: yarn
-      - run: yarn bundle
       - name: Run local k6 test
         uses: grafana/k6-action@v0.2.0
         with:
-          filename: dist/log-events-by-topic0.test.js
-          flags: --env NODE_URL=https://mainnet.vechain.org
+          filename: src/endpoints/all-endpoints.test.js
+          flags: --env NODE_URL=https://mainnet.vechain.org --console-output=load.log --log-format=raw

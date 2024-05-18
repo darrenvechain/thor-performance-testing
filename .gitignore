@@ -6,3 +6,5 @@ dist
 *.csv
 k6.logs
 results.json
+load.log
+replay.log
