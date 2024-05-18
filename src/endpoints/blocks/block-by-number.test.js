@@ -6,4 +6,4 @@ const createRequestPath = (seed) =>
 
 // `options` and `handleSummary`
 export * from "../../config.js";
-export default expectNonNull(createRequestPath);
+export default expectNonNull(createRequestPath, "block-by-number");

@@ -5,4 +5,4 @@ const createRequestPath = (seed) =>
   `${dataHelpers.transactionId(seed)}/receipt`;
 
 export * from "../../config.js";
-export default expectNonNull(createRequestPath);
+export default expectNonNull(createRequestPath, "tx-receipts");
