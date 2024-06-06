@@ -9,7 +9,7 @@ const get = (url, params) => {
   /** @type {ReplayRequest} */
   const log = {
     startTime: exec.instance.currentTestRunDuration,
-    url,
+    url: `/${url.split("/").slice(3).join("/")}`,
   };
 
   const res = k6.get(url, params);

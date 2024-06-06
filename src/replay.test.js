@@ -2,6 +2,7 @@ import { SharedArray } from "k6/data";
 import exec from "k6/execution";
 import { check, sleep } from "k6";
 import http from "k6/http";
+import {config} from "./config.js";
 /** @typedef {import('./types').ReplayRequest} */
 
 /** @type {Array<ReplayRequest>} */
@@ -42,9 +43,9 @@ export default function () {
   let res;
 
   if (request.method === "GET") {
-    res = http.get(request.url);
+    res = http.get(`${config.nodeUrl}/${request.url}`);
   } else if (request.method === "POST") {
-    res = http.post(request.url, request.body);
+    res = http.post(`${config.nodeUrl}/${request.url}`, request.body);
   }
 
   check(res, {
