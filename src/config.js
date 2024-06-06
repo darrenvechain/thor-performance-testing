@@ -41,4 +41,5 @@ export const options = {
 export const config = {
   nodeUrl: nodeUrl.endsWith("/") ? nodeUrl.slice(0, -1) : nodeUrl,
   network,
+  timeout: "5s",
 };

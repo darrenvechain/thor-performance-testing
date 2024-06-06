@@ -17,7 +17,15 @@
   "scripts": {
     "format": " prettier src/**/**.js --write",
     "test:load": "rm load.log; k6 run -e NODE_URL=https://mainnet.dev.node.vechain.org --console-output=load.log --log-format=raw",
-    "test:replay": "k6 run -e NODE_URL=https://mainnet.dev.node.vechain.org src/replay.test.js"
+    "test:replay": "k6 run -e NODE_URL=https://mainnet.dev.node.vechain.org src/replay.test.js",
+    "test:replay:dev:green:mainnet": "k6 run -e NODE_URL=https://mainnet.green.dev.node.vechain.org src/replay.test.js",
+    "test:replay:dev:blue:mainnet": "k6 run -e NODE_URL=https://mainnet.blue.dev.node.vechain.org src/replay.test.js",
+    "test:replay:dev:green:testnet": "k6 run -e NODE_URL=https://testnet.green.dev.node.vechain.org src/replay.test.js",
+    "test:replay:dev:blue:testnet": "k6 run -e NODE_URL=https://testnet.blue.dev.node.vechain.org src/replay.test.js",
+    "test:replay:prod:green:mainnet": "k6 run -e NODE_URL=https://mainnet.green.prod.node.vechain.org src/replay.test.js",
+    "test:replay:prod:blue:mainnet": "k6 run -e NODE_URL=https://mainnet.blue.prod.node.vechain.org src/replay.test.js",
+    "test:replay:prod:green:testnet": "k6 run -e NODE_URL=https://testnet.green.prod.node.vechain.org src/replay.test.js",
+    "test:replay:prod:blue:testnet": "k6 run -e NODE_URL=https://testnet.blue.prod.node.vechain.org src/replay.test.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5"

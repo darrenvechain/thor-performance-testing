@@ -43,9 +43,9 @@ export default function () {
   let res;
 
   if (request.method === "GET") {
-    res = http.get(`${config.nodeUrl}/${request.url}`);
+    res = http.get(`${config.nodeUrl}${request.url}`);
   } else if (request.method === "POST") {
-    res = http.post(`${config.nodeUrl}/${request.url}`, request.body);
+    res = http.post(`${config.nodeUrl}${request.url}`, request.body);
   }
 
   check(res, {

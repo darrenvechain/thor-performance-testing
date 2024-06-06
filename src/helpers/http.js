@@ -1,6 +1,8 @@
 /** @typedef {import('../types').ReplayRequest} */
 import k6 from "k6/http";
 import exec from "k6/execution";
+import {config} from "../config.js";
+
 /**
  * Custom http functions, so we can log requests to a log file and replay them later
  */
@@ -11,6 +13,11 @@ const get = (url, params) => {
     startTime: exec.instance.currentTestRunDuration,
     url: `/${url.split("/").slice(3).join("/")}`,
   };
+
+  if (!params) {
+    params = {};
+  }
+  params.timeout = config.timeout;
 
   const res = k6.get(url, params);
 
@@ -27,9 +34,14 @@ const post = (url, body, params) => {
   /** @type {ReplayRequest} */
   const log = {
     startTime: exec.instance.currentTestRunDuration,
-    url,
+    url: `/${url.split("/").slice(3).join("/")}`,
     body,
   };
+
+  if (!params) {
+    params = {};
+  }
+  params.timeout = config.timeout;
 
   const res = k6.post(url, body, params);
 
