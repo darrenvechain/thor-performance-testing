@@ -1,3 +1,5 @@
+import getAccountCode from "./accounts/get-account-code.js";
+import getAccount from "./accounts/get-account.js";
 import blockByIdTest from "./blocks/block-by-id.test.js";
 import blockByNumber from "./blocks/block-by-number.test.js";
 import txByIdTest from "./transactions/tx-by-id.test.js";
@@ -25,6 +27,10 @@ import { SharedArray } from "k6/data";
  * will be selected twice as often as blocks.
  */
 const tests = {
+  accounts: {
+    weight: 20,
+    tests: [getAccountCode, getAccount],
+  },
   blocks: {
     weight: 10,
     tests: [blockByIdTest, blockByNumber],
