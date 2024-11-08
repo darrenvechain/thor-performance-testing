@@ -5,4 +5,4 @@ const createRequestPath = (seed) =>
   `${dataHelpers.transactionId(seed)}?head=${dataHelpers.blockId(seed)}`;
 
 export * from "../../config.js";
-export default expectStatus200(createRequestPath);
+export default expectStatus200(createRequestPath, "tx-by-id-with-head");

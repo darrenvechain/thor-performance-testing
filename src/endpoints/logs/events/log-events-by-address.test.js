@@ -18,4 +18,4 @@ const generateRequestBody = (seed) => {
 };
 
 export * from "../../../config.js";
-export default expectAtLeastOneEvent(generateRequestBody);
+export default expectAtLeastOneEvent(generateRequestBody, "events-by-address");
