@@ -9,6 +9,7 @@ import txByIdWithHeadTest from "./transactions/tx-by-id-with-head.test.js";
 import { randomHelpers } from "../helpers/random-helpers.js";
 import { SharedArray } from "k6/data";
 import getAccountHistoric from "./accounts/get-account-historic";
+import beat2SubTest from "./subscriptions/beat2-sub.test";
 
 /**
  * Test groups and their weights. Eg. if blocks has a weight of 10, and transactions a weight of 20, then transactions
@@ -30,6 +31,12 @@ const tests = {
             txByIdWithHeadTest,
             txReceiptByIdTest,
             txReceiptByIdWithHeadTest,
+        ],
+    },
+    wesockets: {
+        weight: 10,
+        tests: [
+            beat2SubTest,
         ],
     }
 };
