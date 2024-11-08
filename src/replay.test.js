@@ -55,6 +55,7 @@ export default function () {
     check(res, {
       "status is 101": (r) => r && r.status === 101,
     });
+    sleep(25);
   } else {
     check(res, {
       "status is 200": (r) => r.status === 200,
