@@ -46,9 +46,9 @@ export default function () {
   if (request.url.startsWith('/subscriptions')) {
     res = ws.connect(`${config.nodeUrl}${request.url}`, function (socket) {});
   } else if (request.method === "GET") {
-    res = http.get(`${config.nodeUrl}${request.url}`);
+    res = http.get(http.url`${config.nodeUrl}${request.url}`);
   } else if (request.method === "POST") {
-    res = http.post(`${config.nodeUrl}${request.url}`, request.body);
+    res = http.post(http.url`${config.nodeUrl}${request.url}`, request.body);
   }
 
   if (request.url.startsWith('/subscriptions')) {

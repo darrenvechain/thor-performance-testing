@@ -6,7 +6,6 @@ import {config} from "../config.js";
 /**
  * Custom http functions, so we can log requests to a log file and replay them later
  */
-
 const get = (url, params) => {
   /** @type {ReplayRequest} */
   const log = {
@@ -19,7 +18,9 @@ const get = (url, params) => {
   }
   params.timeout = config.timeout;
 
-  const res = k6.get(url, params);
+
+
+  const res = k6.get(k6.url`${url}`, params);
 
   log.endTime = exec.instance.currentTestRunDuration;
   log.status = res.status;
@@ -43,7 +44,7 @@ const post = (url, body, params) => {
   }
   params.timeout = config.timeout;
 
-  const res = k6.post(url, body, params);
+  const res = k6.post(k6.url`${url}`, body, params);
 
   log.endTime = exec.instance.currentTestRunDuration;
   log.status = res.status;
