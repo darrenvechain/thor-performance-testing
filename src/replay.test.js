@@ -1,6 +1,7 @@
-import { SharedArray } from "k6/data";
+import {SharedArray} from "k6/data";
 import exec from "k6/execution";
-import { check, sleep } from "k6";
+import {check, sleep} from "k6";
+import ws from 'k6/ws';
 import http from "k6/http";
 import {config} from "./config.js";
 /** @typedef {import('./types').ReplayRequest} */
@@ -42,13 +43,22 @@ export default function () {
 
   let res;
 
-  if (request.method === "GET") {
+  if (request.url.startsWith('/subscriptions')) {
+    res = ws.connect(`${config.nodeUrl}${request.url}`, function (socket) {});
+  } else if (request.method === "GET") {
     res = http.get(`${config.nodeUrl}${request.url}`);
   } else if (request.method === "POST") {
     res = http.post(`${config.nodeUrl}${request.url}`, request.body);
   }
 
-  check(res, {
-    "status is 200": (r) => r.status === 200,
-  });
+  if (request.url.startsWith('/subscriptions')) {
+    check(res, {
+      "status is 101": (r) => r && r.status === 101,
+    });
+  } else {
+    check(res, {
+      "status is 200": (r) => r.status === 200,
+    });
+  }
+
 }
