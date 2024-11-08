@@ -16,7 +16,7 @@
   },
   "scripts": {
     "format": " prettier src/**/**.js --write",
-    "test:load": "rm load.log; k6 run -e NODE_URL=https://mainnet.dev.node.vechain.org --console-output=load.log --log-format=raw",
+    "test:load": "rm load.log; k6 run --console-output=load.log --log-format=raw",
     "test:replay": "k6 run src/replay.test.js",
     "test:replay:dev:green:mainnet": "k6 run -e NODE_URL=https://mainnet.green.dev.node.vechain.org src/replay.test.js",
     "test:replay:dev:blue:mainnet": "k6 run -e NODE_URL=https://mainnet.blue.dev.node.vechain.org src/replay.test.js",

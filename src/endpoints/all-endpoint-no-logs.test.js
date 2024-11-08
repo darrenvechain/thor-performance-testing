@@ -1,5 +1,7 @@
 import getAccountCode from "./accounts/get-account-code.js";
 import getAccount from "./accounts/get-account.js";
+import getAccountHistoric from "./accounts/get-account-historic.js";
+import beat2SubTest from "./subscriptions/beat2-sub.test.js";
 import blockByIdTest from "./blocks/block-by-id.test.js";
 import blockByNumber from "./blocks/block-by-number.test.js";
 import txByIdTest from "./transactions/tx-by-id.test.js";
@@ -8,8 +10,7 @@ import txReceiptByIdWithHeadTest from "./transactions/tx-receipt-by-id-with-head
 import txByIdWithHeadTest from "./transactions/tx-by-id-with-head.test.js";
 import { randomHelpers } from "../helpers/random-helpers.js";
 import { SharedArray } from "k6/data";
-import getAccountHistoric from "./accounts/get-account-historic";
-import beat2SubTest from "./subscriptions/beat2-sub.test";
+
 
 /**
  * Test groups and their weights. Eg. if blocks has a weight of 10, and transactions a weight of 20, then transactions
